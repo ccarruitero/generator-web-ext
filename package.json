@@ -24,7 +24,6 @@
     "eslint-config-xo-space": "^0.21.0",
     "jest": "^23.6.0",
     "jest-cli": "^23.0.1",
-    "nsp": "^3.2.1",
     "yeoman-assert": "^3.0.0",
     "yeoman-test": "1.8.0"
   },
@@ -38,7 +37,7 @@
     "testEnvironment": "node"
   },
   "scripts": {
-    "prepublish": "nsp check",
+    "prepublish": "npm audit",
     "lint": "eslint . --fix",
     "test": "jest"
   },
