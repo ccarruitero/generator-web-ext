@@ -3,5 +3,7 @@ node_js:
   - 12
   - 11
   - 10
-before_install: if [[ `npm -v` != 6* ]]; then npm i -g npm@6; fi
+before_install:
+  - if [[ `npm -v` != 6* ]]; then npm i -g npm@6; fi
+  - npm i --package-lock-only
 after_script: 'cat ./coverage/lcov.info | coveralls'
