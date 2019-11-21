@@ -1,8 +1,7 @@
 language: node_js
 node_js:
-  - 12
-  - 11
-  - 10
+  - lts/*
+  - node
 before_install:
   - if [[ `npm -v` != 6* ]]; then npm i -g npm@6; fi
   - npm i --package-lock-only
