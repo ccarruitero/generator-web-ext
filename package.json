@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "chalk": "^2.4.1",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^1.0.3",
     "yeoman-generator": "^4.0.1",
     "yosay": "^2.0.0"
   },
