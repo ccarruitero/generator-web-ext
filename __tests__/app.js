@@ -3,12 +3,14 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
+const extName = 'extName';
+
 function run(prompts, done) {
   helpers.run(path.join(__dirname, '../generators/app'))
     .withOptions({
       'skip-install': true
     })
-    .withPrompts(prompts)
+    .withPrompts({ name: extName, ...prompts})
     .on('end', done)
     .catch(e => {
       console.log(e);
@@ -17,31 +19,32 @@ function run(prompts, done) {
 
 describe('generator-web-ext:app', () => {
   it('creates files', done => {
-    run({name: 'someName'}, () => {
-      assert.file([
+    const name = 'someName';
+    run({ name }, () => {
+      const files = [
         'package.json',
         'extension/manifest.json',
         'extension/_locales/en/messages.json'
-      ]);
+      ];
+      assert.file(files.map(file => `${name}/${file}`));
       done();
     });
   });
 
   it('set name in locales', done => {
-    run({
-      name: 'noPopup'
-    }, () => {
-      assert.fileContent('extension/_locales/en/messages.json', 'noPopup');
+    const name = 'noPopup';
+    run({ name }, () => {
+      assert.fileContent(`${name}/extension/_locales/en/messages.json`, 'noPopup');
       done();
     });
   });
 
   it('allow no popup', done => {
     run({
-      popup: false
+      action: false
     }, () => {
-      assert.noFile('extension/popup/index.html');
-      assert.noFileContent('extension/manifest.json', 'default_popup');
+      assert.noFile(`${extName}/extension/popup/index.html`);
+      assert.noFileContent(`${extName}/extension/manifest.json`, 'default_popup');
       done();
     });
   });
@@ -50,8 +53,8 @@ describe('generator-web-ext:app', () => {
     run({
       background: true
     }, () => {
-      assert.file('extension/background/index.js');
-      assert.fileContent('extension/manifest.json', 'background');
+      assert.file(`${extName}/extension/background/index.js`);
+      assert.fileContent(`${extName}/extension/manifest.json`, 'background');
       done();
     });
   });
@@ -61,9 +64,9 @@ describe('generator-web-ext:app', () => {
       permissions: ['alarms', 'activeTab']
     }, () => {
       assert.fileContent([
-          ['extension/manifest.json', 'permissions'],
-          ['extension/manifest.json', 'alarms'],
-          ['extension/manifest.json', 'activeTab']
+          [`${extName}/extension/manifest.json`, 'permissions'],
+          [`${extName}/extension/manifest.json`, 'alarms'],
+          [`${extName}/extension/manifest.json`, 'activeTab']
       ]);
       done();
     });
@@ -73,9 +76,9 @@ describe('generator-web-ext:app', () => {
     run({
       contentScript: true
     }, () => {
-      assert.fileContent('extension/manifest.json', 'content_scripts');
-      assert.fileContent('extension/manifest.json', '<all_urls>');
-      assert.file('extension/content_scripts/index.js');
+      assert.fileContent(`${extName}/extension/manifest.json`, 'content_scripts');
+      assert.fileContent(`${extName}/extension/manifest.json`, '<all_urls>');
+      assert.file(`${extName}/extension/content_scripts/index.js`);
       done();
     });
   });
@@ -85,9 +88,9 @@ describe('generator-web-ext:app', () => {
       contentScript: true,
       contentScriptMatch: '*://*.mozilla.org/*'
     }, () => {
-      assert.fileContent('extension/manifest.json', 'content_scripts');
-      assert.fileContent('extension/manifest.json', '*://*.mozilla.org/*');
-      assert.file('extension/content_scripts/index.js');
+      assert.fileContent(`${extName}/extension/manifest.json`, 'content_scripts');
+      assert.fileContent(`${extName}/extension/manifest.json`, '*://*.mozilla.org/*');
+      assert.file(`${extName}/extension/content_scripts/index.js`);
       done();
     });
   });
