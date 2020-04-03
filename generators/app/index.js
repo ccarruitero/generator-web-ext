@@ -2,7 +2,7 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
-const { questions, buildExt } = require('@ccarruitero/create-web-ext');
+const {questions, buildExt} = require('@ccarruitero/create-web-ext');
 
 module.exports = class extends Generator {
   prompting() {

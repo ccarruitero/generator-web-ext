@@ -10,7 +10,7 @@ function run(prompts, done) {
     .withOptions({
       'skip-install': true
     })
-    .withPrompts({ name: extName, ...prompts})
+    .withPrompts({name: extName, ...prompts})
     .on('end', done)
     .catch(e => {
       console.log(e);
@@ -20,7 +20,7 @@ function run(prompts, done) {
 describe('generator-web-ext:app', () => {
   it('creates files', done => {
     const name = 'someName';
-    run({ name }, () => {
+    run({name}, () => {
       const files = [
         'package.json',
         'extension/manifest.json',
@@ -33,7 +33,7 @@ describe('generator-web-ext:app', () => {
 
   it('set name in locales', done => {
     const name = 'noPopup';
-    run({ name }, () => {
+    run({name}, () => {
       assert.fileContent(`${name}/extension/_locales/en/messages.json`, 'noPopup');
       done();
     });
@@ -64,9 +64,9 @@ describe('generator-web-ext:app', () => {
       permissions: ['alarms', 'activeTab']
     }, () => {
       assert.fileContent([
-          [`${extName}/extension/manifest.json`, 'permissions'],
-          [`${extName}/extension/manifest.json`, 'alarms'],
-          [`${extName}/extension/manifest.json`, 'activeTab']
+        [`${extName}/extension/manifest.json`, 'permissions'],
+        [`${extName}/extension/manifest.json`, 'alarms'],
+        [`${extName}/extension/manifest.json`, 'activeTab']
       ]);
       done();
     });
