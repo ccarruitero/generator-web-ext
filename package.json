@@ -37,8 +37,8 @@
     "testEnvironment": "node"
   },
   "scripts": {
-    "lint": "eslint . --fix",
-    "test": "jest"
+    "lint": "eslint .",
+    "test": "npm run lint && jest --coverage"
   },
   "eslintConfig": {
     "extends": "xo-space",
