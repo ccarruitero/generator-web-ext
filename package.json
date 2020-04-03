@@ -28,7 +28,7 @@
     "yeoman-test": "^2.0.0"
   },
   "dependencies": {
-    "chalk": "^3.0.0",
+    "chalk": "^4.0.0",
     "yeoman-generator": "^4.7.2",
     "yosay": "^2.0.0",
     "@ccarruitero/create-web-ext": "^0.4.0"
